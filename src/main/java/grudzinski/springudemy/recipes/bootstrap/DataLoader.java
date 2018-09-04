@@ -4,13 +4,16 @@ import grudzinski.springudemy.recipes.domain.*;
 import grudzinski.springudemy.recipes.repositories.CategoryRepository;
 import grudzinski.springudemy.recipes.repositories.RecipeRepository;
 import grudzinski.springudemy.recipes.repositories.UnitOfMeasureRepository;
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
-public class DataLoader implements CommandLineRunner {
+public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
     private CategoryRepository categoryRepository;
     private UnitOfMeasureRepository unitOfMeasureRepository;
@@ -23,7 +26,13 @@ public class DataLoader implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        recipeRepository.saveAll(getRecipes());
+    }
+
+    public List<Recipe> getRecipes() {
+        List<Recipe> recipes = new ArrayList<>();
+
         UnitOfMeasure teaSpoonUnit = unitOfMeasureRepository.findByDescription("Teaspoon").get();
         UnitOfMeasure tableSpoonUnit = unitOfMeasureRepository.findByDescription("Tablespoon").get();
         UnitOfMeasure dashUnit = unitOfMeasureRepository.findByDescription("Dash").get();
@@ -140,6 +149,9 @@ public class DataLoader implements CommandLineRunner {
                 "\n" +
                 "To extend a limited supply of avocados, add either sour cream or cottage cheese to your guacamole dip. Purists may be horrified, but so what? It tastes great."));
 
-        recipeRepository.save(guacamole);
+        recipes.add(guacamole);
+
+        return recipes;
     }
+
 }
