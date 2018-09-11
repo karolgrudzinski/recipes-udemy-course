@@ -1,7 +1,5 @@
 package grudzinski.springudemy.recipes.controllers;
 
-import grudzinski.springudemy.recipes.repositories.CategoryRepository;
-import grudzinski.springudemy.recipes.repositories.UnitOfMeasureRepository;
 import grudzinski.springudemy.recipes.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -12,14 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
 
-    private CategoryRepository categoryRepository;
-    private UnitOfMeasureRepository unitOfMeasureRepository;
-
     private RecipeService recipeService;
 
-    public IndexController(CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository, RecipeService recipeService) {
-        this.categoryRepository = categoryRepository;
-        this.unitOfMeasureRepository = unitOfMeasureRepository;
+    public IndexController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
 
