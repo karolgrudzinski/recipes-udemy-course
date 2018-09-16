@@ -35,8 +35,8 @@
                             <h5>Categories:</h5>
                         </div>
                         <div class="col-md-9">
-                            <ul>
-                                <li>category 1</li>
+                            <ul th:remove="all-but-first">
+                                <li th:each="category : ${recipe.categories}" th:text="${category.description}">category 1</li>
                                 <li>category 2</li>
                                 <li>category 3</li>
                             </ul>
@@ -47,13 +47,13 @@
                             <h5>Prep time:</h5>
                         </div>
                         <div class="col-md-3">
-                            <p>30 min</p>
+                            <p th:text="${recipe.prepTime} + ' min'">30 min</p>
                         </div>
                         <div class="col-md-3">
                             <h5>Difficulty</h5>
                         </div>
                         <div class="col-md-3">
-                            <p>Easy</p>
+                            <p th:text="${recipe.difficulty}">Easy</p>
                         </div>
                     </div>
                     <div class="row">
@@ -61,13 +61,13 @@
                             <h5>Cook time:</h5>
                         </div>
                         <div class="col-md-3">
-                            <p>30 min</p>
+                            <p th:text="${recipe.cookTime} + ' min'">30 min</p>
                         </div>
                         <div class="col-md-3">
                             <h5>Servings</h5>
                         </div>
                         <div class="col-md-3">
-                            <p>4</p>
+                            <p th:text="${recipe.servings}">4</p>
                         </div>
                     </div>
                     <div class="row">
@@ -75,13 +75,13 @@
                             <h5>Source</h5>
                         </div>
                         <div class="col-md-3">
-                            <p>somewhere</p>
+                            <p th:text="${recipe.source}">somewhere</p>
                         </div>
                         <div class="col-md-3">
                             <h5>URL</h5>
                         </div>
                         <div class="col-md-3">
-                            <p>https://www.example.com</p>
+                            <p th:text="${recipe.url}">https://www.example.com</p>
                         </div>
                     </div>
                 </div>
@@ -93,8 +93,11 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <ul>
-                                <li>1 Cup of milk</li>
+                            <ul th:remove="all-but-first">
+                                <li th:each="ingredient : ${recipe.ingredients}"
+                                    th:text="${ingredient.amount}
+                                    + ' ' + ${ingredient.uom.description}
+                                    + ' of ' + ${ingredient.description}">1 Cup of milk</li>
                                 <li>1 Tablespoon of flour</li>
                                 <li>1 Teaspoon of salt</li>
                             </ul>
@@ -109,7 +112,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <p>Lorem impsum dolor sit amet</p>
+                            <p th:text="${recipe.directions}">Lorem impsum dolor sit amet</p>
                         </div>
                     </div>
                 </div>
@@ -121,7 +124,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <p>Lorem impsum dolor sit amet</p>
+                            <p th:text="${recipe.notes.recipeNotes}">Lorem impsum dolor sit amet</p>
                         </div>
                     </div>
                 </div>
