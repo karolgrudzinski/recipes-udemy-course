@@ -38,6 +38,8 @@
                                 <th>Description</th>
                                 <th>Difficulty</th>
                                 <th>View</th>
+                                <th>Update</th>
+                                <th>Delete</th>
                             </tr>
                             </thead>
                             <tr th:remove="all">
@@ -45,18 +47,24 @@
                                 <td>Piece of cake</td>
                                 <td>Moderate</td>
                                 <td><a href="#">View</a></td>
+                                <td><a href="#">Update</a></td>
+                                <td><a href="#">Delete</a></td>
                             </tr>
                             <tr th:remove="all">
                                 <td>1234</td>
                                 <td>Piece of cake</td>
                                 <td>Easy</td>
                                 <td><a href="#">View</a></td>
+                                <td><a href="#">Update</a></td>
+                                <td><a href="#">Delete</a></td>
                             </tr>
                             <tr th:each="recipe : ${recipes}">
                                 <td th:text="${recipe.id}">1234</td>
                                 <td th:text="${recipe.getDescription()}">Piece of cake</td>
                                 <td th:text="${recipe.getDifficulty()}">Nightmare</td>
                                 <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/show'}">View</a></td>
+                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/update'}">Update</a></td>
+                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/delete'}">Delete</a></td>
                             </tr>
                         </table>
                     </div>

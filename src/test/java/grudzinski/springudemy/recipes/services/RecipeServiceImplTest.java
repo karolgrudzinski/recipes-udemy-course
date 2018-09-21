@@ -1,5 +1,6 @@
 package grudzinski.springudemy.recipes.services;
 
+import grudzinski.springudemy.recipes.commands.RecipeCommand;
 import grudzinski.springudemy.recipes.converters.RecipeCommandToRecipe;
 import grudzinski.springudemy.recipes.converters.RecipeToRecipeCommand;
 import grudzinski.springudemy.recipes.domain.Recipe;
@@ -51,6 +52,22 @@ public class RecipeServiceImplTest {
         verify(recipeRepository, never()).findAll();
     }
 
+
+    @Test
+    public void getRecipeCommandByIdTest() throws Exception {
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+        Optional<Recipe> recipeOptional = Optional.of(recipe);
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+        RecipeCommand recipeCommand = new RecipeCommand();
+        recipeCommand.setId(1L);
+        when(recipeToRecipeCommand.convert(any())).thenReturn(recipeCommand);
+        RecipeCommand commandById = recipeService.findCommandById(1L);
+        assertNotNull("Null recipe returned", commandById);
+        verify(recipeRepository, times(1)).findById(anyLong());
+        verify(recipeRepository, never()).findAll();
+    }
+
     @Test
     public void getRecipes() {
         Recipe recipe = new Recipe();
@@ -65,5 +82,13 @@ public class RecipeServiceImplTest {
         assertEquals(recipes.size(), 1);
         verify(recipeRepository, times(1)).findAll();
         verify(recipeRepository, never()).findById(anyLong());
+    }
+
+    @Test
+    public void testDeleteById() {
+        Long idToDelete = 2L;
+        recipeService.deleteById(idToDelete);
+
+        verify(recipeRepository, times(1)).deleteById(anyLong());
     }
 }
