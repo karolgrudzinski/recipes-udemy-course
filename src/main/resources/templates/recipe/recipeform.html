@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe View - Recipes</title>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          rel="stylesheet"
+          th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}">
+    <script crossorigin="anonymous"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            th:href="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+    <script crossorigin="anonymous"
+            integrity="sha256-Rf4BadfyCtsvHmO89BUZcbYvNNvZvOT08ALfEzvCsD0="
+            src="https://code.jquery.com/jquery-3.0.0.slim.min.js"
+            th:href="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+    <script crossorigin="anonymous"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            th:href="@{/webjars/popper.js/1.14.3/umd/popper.min.js}"></script>
+</head>
+<body>
+
+<div class="container-fluid" style="margin-top: 20px;">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <!--/*@thymesVar id="recipe" type="grudzinski.springudemy.recipes.domain.Recipe"*/-->
+            <form  th:object="${recipe}" th:action="@{/recipe/}"  method="post">
+                <input type="hidden" th:field="*{id}" />
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title">Edit Recipe</h1>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>Recipe Description:</label>
+                            <input type="text" class="form-control" th:field="*{description}"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 form-group">
+                            <label>Categories:</label>
+                        </div>
+                        <div class="col-md-9 form-group">
+                            <div class="radio">
+                                <label>
+                                    <input type="checkbox" value=""/>
+                                    Category 1
+                                </label>
+                            </div>
+                            <div class="radio" th:remove="all">
+                                <label>
+                                    <input type="checkbox" value=""/>
+                                    Category 2
+                                </label>
+                            </div>
+                            <!--<ul th:remove="all-but-first">-->
+                                <!--<li th:each="category : ${recipe.categories}" th:text="${category.description}">category 1</li>-->
+                                <!--<li>category 2</li>-->
+                                <!--<li>category 3</li>-->
+                            <!--</ul>-->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 form-group">
+                            <label>Prep time:</label>
+                            <input type="text" class="form-control" th:field="*{prepTime}"/>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Cook time:</label>
+                            <input type="text" class="form-control" th:field="*{cookTime}"/>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label>Difficulty:</label>
+                            <select class="form-control">
+                                <option>Easy</option>
+                                <option>Medium</option>
+                                <option>Hard</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 form-group">
+                            <label>Servings:</label>
+                            <input type="text" class="form-control" th:field="*{servings}"/>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label>Source:</label>
+                            <input type="text" class="form-control" th:field="*{source}"/>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label>URL:</label>
+                            <input type="text" class="form-control" th:field="*{url}"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-11 ">
+                            <h1 class="card-title">Ingredients</h1>
+                        </div>
+                        <div class="col-md-1">
+                            <a class="btn btn-default" href="#" role="button">Edit</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul th:remove="all-but-first">
+                                <!--/*@thymesVar id="uom" type="grudzinski.springudemy.recipes.domain.UnitOfMeasure"*/-->
+                                <li th:each="ingredient : ${recipe.ingredients}"
+                                    th:text="${ingredient.amount}
+                                    + ' ' + ${ingredient.uom.description}
+                                    + ' of ' + ${ingredient.description}">1 Cup of milk</li>
+                                <li>1 Tablespoon of flour</li>
+                                <li>1 Teaspoon of salt</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title">Directions</h1>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <textarea class="form-control" rows="5" th:field="*{directions}"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title">Notes</h1>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <textarea class="form-control" rows="5" th:field="*{notes.recipeNotes}"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
