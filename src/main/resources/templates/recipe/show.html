@@ -88,7 +88,8 @@
             </div>
             <div class="card">
                 <div class="card-header">
-                    <h1 class="card-title">Ingredients</h1>
+                            <h5 class="card-title">Ingredients</h5>
+                            <a class="card-link btn btn-primary" href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}" role="button">View</a>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -107,7 +108,7 @@
             </div>
             <div class="card">
                 <div class="card-header">
-                    <h1 class="card-title">Directions</h1>
+                    <h5 class="card-title">Directions</h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -119,7 +120,7 @@
             </div>
             <div class="card">
                 <div class="card-header">
-                    <h1 class="card-title">Notes</h1>
+                    <h5 class="card-title">Notes</h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
