@@ -28,6 +28,7 @@
             <div class="card">
                 <div class="card-header">
                     <h1 class="card-title">Ingredients</h1>
+                    <a class="card-link btn btn-primary" href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/new'}" role="button">New</a>
                 </div>
                 <div class="card-body">
                     <!--/*@thymesVar id="recipe" type="grudzinski.springudemy.recipes.domain.Recipe"*/-->

@@ -1,6 +1,8 @@
 package grudzinski.springudemy.recipes.controllers;
 
 import grudzinski.springudemy.recipes.commands.IngredientCommand;
+import grudzinski.springudemy.recipes.commands.RecipeCommand;
+import grudzinski.springudemy.recipes.commands.UnitOfMeasureCommand;
 import grudzinski.springudemy.recipes.services.IngredientService;
 import grudzinski.springudemy.recipes.services.RecipeService;
 import grudzinski.springudemy.recipes.services.UnitOfMeasureService;
@@ -37,6 +39,20 @@ public class IngredientController {
         model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(id)));
         
         return "recipe/ingredient/show";
+    }
+
+    @GetMapping("recipe/{recipeId}/ingredient/new")
+    public String newRecipeIngredient(@PathVariable String recipeId, Model model) {
+        RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
+        // TODO: make proper error handling
+
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(Long.valueOf(recipeId));
+        model.addAttribute("ingredient", ingredientCommand);
+        ingredientCommand.setUom(new UnitOfMeasureCommand());
+        model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
+        
+        return "recipe/ingredient/ingredientform";
     }
 
     @GetMapping("recipe/{recipeId}/ingredient/{id}/update")
