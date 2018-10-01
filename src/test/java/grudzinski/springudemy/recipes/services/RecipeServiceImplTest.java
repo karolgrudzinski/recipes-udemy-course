@@ -4,6 +4,7 @@ import grudzinski.springudemy.recipes.commands.RecipeCommand;
 import grudzinski.springudemy.recipes.converters.RecipeCommandToRecipe;
 import grudzinski.springudemy.recipes.converters.RecipeToRecipeCommand;
 import grudzinski.springudemy.recipes.domain.Recipe;
+import grudzinski.springudemy.recipes.exceptions.NotFoundException;
 import grudzinski.springudemy.recipes.repositories.RecipeRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,6 +53,13 @@ public class RecipeServiceImplTest {
         verify(recipeRepository, never()).findAll();
     }
 
+    @Test(expected = NotFoundException.class)
+    public void getRecipeByIdNotFoundTest() throws Exception {
+        Optional<Recipe> recipeOptional = Optional.empty();
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        Recipe recipeReturned = recipeService.findById(1L);
+    }
 
     @Test
     public void getRecipeCommandByIdTest() throws Exception {

@@ -4,6 +4,7 @@ import grudzinski.springudemy.recipes.commands.RecipeCommand;
 import grudzinski.springudemy.recipes.converters.RecipeCommandToRecipe;
 import grudzinski.springudemy.recipes.converters.RecipeToRecipeCommand;
 import grudzinski.springudemy.recipes.domain.Recipe;
+import grudzinski.springudemy.recipes.exceptions.NotFoundException;
 import grudzinski.springudemy.recipes.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -41,7 +42,7 @@ public class RecipeServiceImpl implements RecipeService {
         Optional<Recipe> recipeOptional = recipeRepository.findById(id);
 
         if (!recipeOptional.isPresent()) {
-            throw new RuntimeException("Recipe not found");
+            throw new NotFoundException("Recipe not found");
         }
 
         return recipeOptional.get();
