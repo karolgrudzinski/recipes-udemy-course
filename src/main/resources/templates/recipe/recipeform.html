@@ -28,6 +28,9 @@
             <!--/*@thymesVar id="recipe" type="grudzinski.springudemy.recipes.domain.Recipe"*/-->
             <form  th:object="${recipe}" th:action="@{/recipe/}"  method="post">
                 <input type="hidden" th:field="*{id}" />
+                <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                    Please correct errors below
+                </div>
             <div class="card">
                 <div class="card-header">
                     <h1 class="card-title">Edit Recipe</h1>
@@ -36,7 +39,9 @@
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <label>Recipe Description:</label>
-                            <input type="text" class="form-control" th:field="*{description}"/>
+                            <input type="text" class="form-control" th:field="*{description}" th:errorclass="is-invalid"/>
+                            <div th:if="${#fields.hasErrors('description')}"  th:errors="*{description}"
+                                 class="invalid-feedback"></div>
                         </div>
                     </div>
                     <div class="row">
@@ -66,11 +71,15 @@
                     <div class="row">
                         <div class="col-md-3 form-group">
                             <label>Prep time:</label>
-                            <input type="text" class="form-control" th:field="*{prepTime}"/>
+                            <input type="text" class="form-control" th:field="*{prepTime}" th:errorclass="is-invalid" />
+                            <div th:if="${#fields.hasErrors('prepTime')}"  th:errors="*{prepTime}"
+                                 class="invalid-feedback"></div>
                         </div>
                         <div class="col-md-3">
                             <label>Cook time:</label>
-                            <input type="text" class="form-control" th:field="*{cookTime}"/>
+                            <input type="text" class="form-control" th:field="*{cookTime}" th:errorclass="is-invalid"/>
+                            <div th:if="${#fields.hasErrors('cookTime')}"  th:errors="*{cookTime}"
+                                 class="invalid-feedback"></div>
                         </div>
                         <div class="col-md-3 form-group">
                             <label>Difficulty:</label>
@@ -90,7 +99,9 @@
                     <div class="row">
                         <div class="col-md-3 form-group">
                             <label>Servings:</label>
-                            <input type="text" class="form-control" th:field="*{servings}"/>
+                            <input type="text" class="form-control" th:field="*{servings}" th:errorclass="is-invalid"/>
+                            <div th:if="${#fields.hasErrors('servings')}"  th:errors="*{servings}"
+                                 class="invalid-feedback"></div>
                         </div>
                         <div class="col-md-3 form-group">
                             <label>Source:</label>
@@ -98,7 +109,9 @@
                         </div>
                         <div class="col-md-3 form-group">
                             <label>URL:</label>
-                            <input type="text" class="form-control" th:field="*{url}"/>
+                            <input type="text" class="form-control" th:field="*{url}" th:errorclass="is-invalid"/>
+                            <div th:if="${#fields.hasErrors('url')}"  th:errors="*{url}"
+                                 class="invalid-feedback"></div>
                         </div>
                     </div>
                 </div>
@@ -136,8 +149,10 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-12">
-                            <textarea class="form-control" rows="5" th:field="*{directions}"></textarea>
+                        <div class="col-md-12 form-group">
+                            <textarea class="form-control" rows="5" th:field="*{directions}" th:errorclass="is-invalid"></textarea>
+                            <div th:if="${#fields.hasErrors('directions')}"  th:errors="*{directions}"
+                                 class="invalid-feedback"></div>
                         </div>
                     </div>
                 </div>
