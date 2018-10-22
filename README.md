@@ -21,4 +21,5 @@ recipes and its ingredients.
 - Simplify Ingredient services by creating IngredientRepository or something like that  
 
 ## Tests status
-[![CircleCI](https://circleci.com/bb/karolgrudzinski/recipes.svg?style=svg&circle-token=01a3a0edf01e2bd1e705e03952bfba6341950f2f)](https://circleci.com/bb/karolgrudzinski/recipes)
+[![CircleCI](https://circleci.com/gh/karolgrudzinski/recipes-udemy-course.svg?style=svg)](https://circleci.com/gh/karolgrudzinski/recipes-udemy-course)
+[![codecov](https://codecov.io/gh/karolgrudzinski/recipes-udemy-course/branch/master/graph/badge.svg)](https://codecov.io/gh/karolgrudzinski/recipes-udemy-course)
