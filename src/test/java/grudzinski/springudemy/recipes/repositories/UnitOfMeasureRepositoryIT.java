@@ -2,6 +2,7 @@ package grudzinski.springudemy.recipes.repositories;
 
 import grudzinski.springudemy.recipes.domain.UnitOfMeasure;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 
+@Ignore("JPA test - not going to work with Mongo")
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class UnitOfMeasureRepositoryIT {

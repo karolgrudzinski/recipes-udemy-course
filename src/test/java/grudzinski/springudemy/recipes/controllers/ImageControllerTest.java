@@ -4,6 +4,7 @@ import grudzinski.springudemy.recipes.commands.RecipeCommand;
 import grudzinski.springudemy.recipes.services.ImageService;
 import grudzinski.springudemy.recipes.services.RecipeService;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -98,6 +99,7 @@ public class ImageControllerTest {
 
 
     @Test
+    @Ignore("Not needed for MongoDB")
     public void testGetImageNumberFormatException() throws Exception {
         mockMvc.perform(get("/recipe/asdf/recipeimage"))
                 .andExpect(status().isBadRequest())

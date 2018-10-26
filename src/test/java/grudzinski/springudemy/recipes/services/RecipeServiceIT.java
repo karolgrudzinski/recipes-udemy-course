@@ -5,6 +5,7 @@ import grudzinski.springudemy.recipes.converters.RecipeCommandToRecipe;
 import grudzinski.springudemy.recipes.converters.RecipeToRecipeCommand;
 import grudzinski.springudemy.recipes.domain.Recipe;
 import grudzinski.springudemy.recipes.repositories.RecipeRepository;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,7 @@ public class RecipeServiceIT {
 
     @Transactional
     @Test
+    @Ignore("Not ready yet")
     public void testSaveOfDescription() throws Exception {
         //given
         Iterable<Recipe> recipes = recipeRepository.findAll();
