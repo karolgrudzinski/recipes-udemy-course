@@ -8,7 +8,8 @@ recipes and its ingredients.
 - Java 8
 - Spring 5
 - Spring Boot 2
-- Spring Data JPA
+- Spring Data
+- MongoDB
 - Project Lombok 
 - Thymeleaf
 - Bootstrap 4
@@ -21,5 +22,5 @@ recipes and its ingredients.
 - Simplify Ingredient services by creating IngredientRepository or something like that  
 
 ## Tests status
-[![CircleCI](https://circleci.com/gh/karolgrudzinski/recipes-udemy-course.svg?style=svg)](https://circleci.com/gh/karolgrudzinski/recipes-udemy-course)
-[![codecov](https://codecov.io/gh/karolgrudzinski/recipes-udemy-course/branch/master/graph/badge.svg)](https://codecov.io/gh/karolgrudzinski/recipes-udemy-course)
+[![CircleCI](https://circleci.com/gh/karolgrudzinski/recipes-udemy-course/tree/mongodb.svg?style=svg)](https://circleci.com/gh/karolgrudzinski/recipes-udemy-course/tree/mongodb)
+[![codecov](https://codecov.io/gh/karolgrudzinski/recipes-udemy-course/branch/mongodb/graph/badge.svg)](https://codecov.io/gh/karolgrudzinski/recipes-udemy-course/branch/mongodb)
