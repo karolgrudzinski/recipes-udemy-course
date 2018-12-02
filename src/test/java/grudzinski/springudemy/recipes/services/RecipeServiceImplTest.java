@@ -31,11 +31,14 @@ public class RecipeServiceImplTest {
     @Mock
     private RecipeCommandToRecipe recipeCommandToRecipe;
 
+    @Mock
+    private CategoryService categoryService;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        this.recipeService = new RecipeServiceImpl(recipeRepository, recipeToRecipeCommand, recipeCommandToRecipe);
+        this.recipeService = new RecipeServiceImpl(recipeRepository, recipeToRecipeCommand, recipeCommandToRecipe, categoryService);
     }
 
     @Test

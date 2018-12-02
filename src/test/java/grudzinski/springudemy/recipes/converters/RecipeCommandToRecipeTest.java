@@ -29,7 +29,6 @@ public class RecipeCommandToRecipeTest {
 
     RecipeCommandToRecipe converter;
 
-
     @Before
     public void setUp() throws Exception {
         converter = new RecipeCommandToRecipe(new CategoryCommandToCategory(),

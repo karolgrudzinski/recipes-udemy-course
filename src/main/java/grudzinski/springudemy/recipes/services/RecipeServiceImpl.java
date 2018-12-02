@@ -21,11 +21,13 @@ public class RecipeServiceImpl implements RecipeService {
     private final RecipeRepository recipeRepository;
     private final RecipeToRecipeCommand recipeToRecipeCommand;
     private final RecipeCommandToRecipe recipeCommandToRecipe;
+    private final CategoryService categoryService;
 
-    public RecipeServiceImpl(RecipeRepository recipeRepository, RecipeToRecipeCommand recipeToRecipeCommand, RecipeCommandToRecipe recipeCommandToRecipe) {
+    public RecipeServiceImpl(RecipeRepository recipeRepository, RecipeToRecipeCommand recipeToRecipeCommand, RecipeCommandToRecipe recipeCommandToRecipe, CategoryService categoryService) {
         this.recipeRepository = recipeRepository;
         this.recipeToRecipeCommand = recipeToRecipeCommand;
         this.recipeCommandToRecipe = recipeCommandToRecipe;
+        this.categoryService = categoryService;
     }
 
     @Override
@@ -52,6 +54,14 @@ public class RecipeServiceImpl implements RecipeService {
     @Transactional
     public RecipeCommand saveRecipeCommand(RecipeCommand command) {
         Recipe detachedRecipe = recipeCommandToRecipe.convert(command);
+
+        if (command.getCategoriesToSave().size() > 0) {
+            log.debug(String.valueOf(command.getCategories().size()));
+            log.debug(String.valueOf(command.getCategoriesToSave().size()));
+            detachedRecipe.getCategories().addAll(
+                    categoryService.findCategoriesByDescription(command.getCategoriesToSave()));
+            log.debug(String.valueOf(detachedRecipe.getCategories().size()));
+        }
 
         Recipe savedRecipe = recipeRepository.save(detachedRecipe);
         log.debug("Saved RecipeId:" + savedRecipe.getId());

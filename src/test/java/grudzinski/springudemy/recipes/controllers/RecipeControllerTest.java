@@ -3,6 +3,7 @@ package grudzinski.springudemy.recipes.controllers;
 import grudzinski.springudemy.recipes.commands.RecipeCommand;
 import grudzinski.springudemy.recipes.domain.Recipe;
 import grudzinski.springudemy.recipes.exceptions.NotFoundException;
+import grudzinski.springudemy.recipes.services.CategoryService;
 import grudzinski.springudemy.recipes.services.RecipeService;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,6 +24,9 @@ public class RecipeControllerTest {
     @Mock
     RecipeService recipeService;
 
+    @Mock
+    CategoryService categoryService;
+
     RecipeController controller;
 
     MockMvc mockMvc;
@@ -31,7 +35,7 @@ public class RecipeControllerTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        controller = new RecipeController(recipeService);
+        controller = new RecipeController(recipeService, categoryService);
 
         mockMvc = MockMvcBuilders.standaloneSetup(controller)
                 .setControllerAdvice(ControllerExceptionHandler.class)
@@ -72,7 +76,8 @@ public class RecipeControllerTest {
         mockMvc.perform(get("/recipe/new"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/recipeform"))
-                .andExpect(model().attributeExists("recipe"));
+                .andExpect(model().attributeExists("recipe"))
+                .andExpect(model().attributeExists("allCategories"));
     }
 
     @Test
@@ -116,7 +121,8 @@ public class RecipeControllerTest {
         mockMvc.perform(get("/recipe/1/update"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/recipeform"))
-                .andExpect(model().attributeExists("recipe"));
+                .andExpect(model().attributeExists("recipe"))
+                .andExpect(model().attributeExists("allCategories"));
     }
 
     @Test
