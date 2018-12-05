@@ -35,6 +35,8 @@
                                 th:action="@{'/recipe/' + ${recipe.getId()} + '/image'}">
                             <input id="imagefile" name="imagefile" type="file" class="form-control-file" />
                             <button type="submit" class="btn btn-primary">Submit</button>
+                            <a class="btn btn-primary" href="#"
+                               th:href="@{'/recipe/' + ${recipe.id} + '/show'}" role="button">Cancel</a>
                         </form>
                     </div>
                 </div>
