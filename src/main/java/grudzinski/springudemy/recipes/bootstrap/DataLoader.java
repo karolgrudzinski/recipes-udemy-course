@@ -4,7 +4,9 @@ import grudzinski.springudemy.recipes.domain.*;
 import grudzinski.springudemy.recipes.repositories.CategoryRepository;
 import grudzinski.springudemy.recipes.repositories.RecipeRepository;
 import grudzinski.springudemy.recipes.repositories.UnitOfMeasureRepository;
+import grudzinski.springudemy.recipes.repositories.reactive.UnitOfMeasureReactiveRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -24,6 +26,9 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
     private UnitOfMeasureRepository unitOfMeasureRepository;
     private RecipeRepository recipeRepository;
 
+    @Autowired
+    UnitOfMeasureReactiveRepository unitOfMeasureReactiveRepository;
+
     public DataLoader(CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository, RecipeRepository recipeRepository) {
         this.categoryRepository = categoryRepository;
         this.unitOfMeasureRepository = unitOfMeasureRepository;
@@ -36,6 +41,8 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         loadCategories();
         loadUom();
         recipeRepository.saveAll(getRecipes());
+
+        log.debug("Reactive count :" + unitOfMeasureReactiveRepository.count().block());
     }
 
 
