@@ -4,9 +4,7 @@ import grudzinski.springudemy.recipes.domain.*;
 import grudzinski.springudemy.recipes.repositories.CategoryRepository;
 import grudzinski.springudemy.recipes.repositories.RecipeRepository;
 import grudzinski.springudemy.recipes.repositories.UnitOfMeasureRepository;
-import grudzinski.springudemy.recipes.repositories.reactive.UnitOfMeasureReactiveRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -26,8 +24,14 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
     private UnitOfMeasureRepository unitOfMeasureRepository;
     private RecipeRepository recipeRepository;
 
-    @Autowired
-    UnitOfMeasureReactiveRepository unitOfMeasureReactiveRepository;
+//    @Autowired
+//    UnitOfMeasureReactiveRepository unitOfMeasureReactiveRepository;
+//
+//    @Autowired
+//    CategoryReactiveRepository categoryReactiveRepository;
+//
+//    @Autowired
+//    RecipeReactiveRepository recipeReactiveRepository;
 
     public DataLoader(CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository, RecipeRepository recipeRepository) {
         this.categoryRepository = categoryRepository;
@@ -42,7 +46,9 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         loadUom();
         recipeRepository.saveAll(getRecipes());
 
-        log.debug("Reactive count :" + unitOfMeasureReactiveRepository.count().block());
+//        log.debug("Reactive UoM count: " + unitOfMeasureReactiveRepository.count().block());
+//        log.debug("Reactive Category count: " + categoryReactiveRepository.count().block());
+//        log.debug("Reactive Recipe count: " + recipeReactiveRepository.count().block());
     }
 
 
